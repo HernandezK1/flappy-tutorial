@@ -9,8 +9,12 @@ public class GameManager : MonoBehaviour
     public GameObject gameOver;
     public Spawner spawner;
     private Health playerHealth;
-    private int score;
-    public GameObject[] life;
+    private int score; public GameObject[] life;
+    private int scoreIndex;
+    public GameObject prefabs;
+    public float incrementAmount;
+    public int incrementSpeed;
+
     private void Awake()
     {
         Application.targetFrameRate = 60;
@@ -25,6 +29,7 @@ public class GameManager : MonoBehaviour
     }
     public void Play()
     {
+        prefabs.GetComponent<Pipes>().speed = 5;
         playerHealth = player.GetComponent<Health>();
         score = 0;
         scoreText.text = score.ToString();
@@ -68,20 +73,31 @@ public class GameManager : MonoBehaviour
     {
         score++;
         scoreText.text = score.ToString();
+
+        if (scoreIndex == incrementSpeed) 
+        {
+
+            prefabs.GetComponent<Pipes>().speed = prefabs.GetComponent<Pipes>().speed + incrementAmount;
+            scoreIndex = 0;
+        }
+        else
+        {
+            scoreIndex++;
+        }
     }
 
     private void Update()
     {
         if (score == 10)
         {
-           spawner.minHeight = -2f;
-            spawner.maxHeight = 2f;
+           spawner.minHeight = -1.5f;
+            spawner.maxHeight = 1.5f;
         }
 
         if (score == 20)
         {
-            spawner.minHeight = -3f;
-            spawner.maxHeight = 3f;
+            spawner.minHeight = -2f;
+            spawner.maxHeight = 2f;
         }
 
         if (score ==50)
@@ -91,6 +107,12 @@ public class GameManager : MonoBehaviour
             player.enabled = false;
             Pause();
         }
+
+        if (score == 35)
+        {
+            spawner.spawnRate = 0.1f;
+        }
+               
     }
     public void TakeDamage()
     {

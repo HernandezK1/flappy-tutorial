@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 345549377}
   - component: {fileID: 345549376}
   m_Layer: 0
-  m_Name: 1Up (2)
+  m_Name: life(2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -248,7 +248,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 345549375}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.95, y: 4.67, z: 0}
+  m_LocalPosition: {x: -9.15, y: 4.64, z: 0}
   m_LocalScale: {x: 2.5, y: 2.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -541,6 +541,7 @@ GameObject:
   m_Component:
   - component: {fileID: 878108787}
   - component: {fileID: 878108786}
+  - component: {fileID: 878108788}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -565,6 +566,13 @@ MonoBehaviour:
   playButton: {fileID: 997693525}
   gameOver: {fileID: 1981745150}
   spawner: {fileID: 101350489}
+  life:
+  - {fileID: 1695069483}
+  - {fileID: 1148959413}
+  - {fileID: 345549375}
+  prefabs: {fileID: 6964803173935149451, guid: 53fb2ad7596df1540b9dfb0be3ef7064, type: 3}
+  incrementAmount: 1.5
+  incrementSpeed: 5
 --- !u!4 &878108787
 Transform:
   m_ObjectHideFlags: 0
@@ -580,6 +588,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &878108788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878108785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bc7d52dbd98523478e974eba410d20c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 0
 --- !u!1 &997693525
 GameObject:
   m_ObjectHideFlags: 0
@@ -724,7 +745,7 @@ GameObject:
   - component: {fileID: 1148959415}
   - component: {fileID: 1148959414}
   m_Layer: 0
-  m_Name: 1Up (1)
+  m_Name: life(1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1104,7 +1125,7 @@ GameObject:
   - component: {fileID: 1695069485}
   - component: {fileID: 1695069484}
   m_Layer: 0
-  m_Name: 1Up
+  m_Name: life
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1170,7 +1191,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1695069483}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.51, y: 4.67, z: 0}
+  m_LocalPosition: {x: -10.37, y: 4.67, z: 0}
   m_LocalScale: {x: 2.5, y: 2.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1379,6 +1400,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: de0ea1c17e2dba64892f980b028c7bba, type: 3}
   gravity: -9.8
   strength: 5
+  life:
+  - {fileID: 1695069483}
+  - {fileID: 1148959413}
+  - {fileID: 345549375}
 --- !u!58 &2056665370
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1394,4 +1419,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.25
+  m_Radius: 0.2
