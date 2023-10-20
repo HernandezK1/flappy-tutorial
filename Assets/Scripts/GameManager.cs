@@ -9,11 +9,15 @@ public class GameManager : MonoBehaviour
     public GameObject gameOver;
     public Spawner spawner;
     private Health playerHealth;
-    private int score; public GameObject[] life;
+    private int score;
+    public GameObject youWin;
+    public GameObject getReady;
+    public GameObject[] life;
     private int scoreIndex;
     public GameObject prefabs;
     public float incrementAmount;
     public int incrementSpeed;
+    public Sprite deathSprite;
 
     private void Awake()
     {
@@ -36,6 +40,9 @@ public class GameManager : MonoBehaviour
 
         playButton.SetActive(false);
         gameOver.SetActive(false);
+        getReady.SetActive(false);
+        youWin.SetActive(false);
+        
 
         Time.timeScale = 1f;
         player.enabled = true;
@@ -49,7 +56,7 @@ public class GameManager : MonoBehaviour
 
         spawner.minHeight = -1f;
         spawner.maxHeight = 1f;
-
+        
         playerHealth.currentHealth = Health.maxHealth;
         life[0].gameObject.SetActive(true);
         life[1].gameObject.SetActive(true);
@@ -66,7 +73,7 @@ public class GameManager : MonoBehaviour
     {
         gameOver.SetActive(true);
         playButton.SetActive(true);
-
+        //dead = true;
         Pause();
     }
     public void IncreaseScore()
@@ -102,7 +109,7 @@ public class GameManager : MonoBehaviour
 
         if (score ==50)
         {
-            gameOver.SetActive(true);
+            youWin.SetActive(true);
             playButton.SetActive(true);
             player.enabled = false;
             Pause();
@@ -112,7 +119,7 @@ public class GameManager : MonoBehaviour
         {
             spawner.spawnRate = 0.1f;
         }
-               
+        //dead = player.isDead;       
     }
     public void TakeDamage()
     {
@@ -131,6 +138,8 @@ public class GameManager : MonoBehaviour
         }
         if(playerHealth.currentHealth == 0)
         {
+            player.isDead = true;
+            player.GetComponent<SpriteRenderer>().sprite = deathSprite;
             GameOver(); 
         }
 

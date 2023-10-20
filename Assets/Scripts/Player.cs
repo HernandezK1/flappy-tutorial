@@ -1,16 +1,20 @@
 
+using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class Player : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
+    public Sprite deathSprite;
     public Sprite[] sprites;
     private int spriteIndex = 0;
     private Vector3 direction;
     public float gravity = -9.8f;
     public float strength = 5f;
     private Health health;
-    public GameObject[] life;
+    public bool isDead;
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -21,7 +25,6 @@ public class Player : MonoBehaviour
     private void Start()
     {
         InvokeRepeating(nameof(AnimateSprite), 0.15f, 0.15f);
-
     }
 
     private void OnEnable()
@@ -51,22 +54,31 @@ public class Player : MonoBehaviour
         }
         direction.y += gravity * Time.deltaTime;
         transform.position += direction * Time.deltaTime;
+
+      
     }
    
 
     private void AnimateSprite()
     {
         spriteIndex++;
+        if (!isDead) {
 
-        if (spriteIndex >= sprites.Length)
+            if (spriteIndex >= sprites.Length)
+            {
+                spriteIndex = 0;
+            }
+
+            if (spriteIndex < sprites.Length && spriteIndex >= 0)
+            {
+                spriteRenderer.sprite = sprites[spriteIndex];
+            }
+        }
+        else
         {
-            spriteIndex = 0;
+            spriteRenderer.sprite = deathSprite;
         }
 
-        if (spriteIndex < sprites.Length && spriteIndex >= 0)
-        {
-            spriteRenderer.sprite = sprites[spriteIndex];
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
