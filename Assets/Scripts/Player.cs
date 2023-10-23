@@ -55,14 +55,16 @@ public class Player : MonoBehaviour
         direction.y += gravity * Time.deltaTime;
         transform.position += direction * Time.deltaTime;
 
-      
+      if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
    
 
     private void AnimateSprite()
     {
         spriteIndex++;
-        if (!isDead) {
 
             if (spriteIndex >= sprites.Length)
             {
@@ -73,12 +75,6 @@ public class Player : MonoBehaviour
             {
                 spriteRenderer.sprite = sprites[spriteIndex];
             }
-        }
-        else
-        {
-            spriteRenderer.sprite = deathSprite;
-        }
-
     }
 
     private void OnTriggerEnter2D(Collider2D other)

@@ -114,11 +114,6 @@ public class GameManager : MonoBehaviour
             player.enabled = false;
             Pause();
         }
-
-        if (score == 35)
-        {
-            spawner.spawnRate = 0.1f;
-        }
         //dead = player.isDead;       
     }
     public void TakeDamage()
